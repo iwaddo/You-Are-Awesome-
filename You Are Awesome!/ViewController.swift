@@ -8,21 +8,21 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var myMessage: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("👍 viewDidLoad has run!")
-        messageLabel.text = "Fabulous? That's You!"
+        myMessage.text = "Fabulous? That's You!"
     }
     @IBAction func anotherMessageButtonPressed(_ sender: UIButton) {
         print("🆒 The other message button was pressed!")
-        messageLabel.text = "You Are Great!"
+        myMessage.text = "You Are Great!"
     }
     
-    @IBAction func messageButtonPressed(_ sender: UIButton) {
+    @IBAction func showMessagePressed(_ sender: UIButton) {
         print("😎 The message button was pressed!")
-        messageLabel.text = "You Are Awesome!"
+        myMessage.text = "You Are Awesome!"
     }
     
 }
