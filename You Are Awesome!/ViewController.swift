@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     
     @IBAction func showMessagePressed(_ sender: UIButton) {
 
-        var messages = ["You Are замечательно!",
+        let messages = ["You Are замечательно!",
                         "You Are Great!",
                         "You Are Da Bomb!",
                         "I am the Best!"]
