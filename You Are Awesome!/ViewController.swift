@@ -6,37 +6,63 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     
-    var imageNumber = 0
-    var messageNumber = 0
+    var imageNumber = -1
+    var messageNumber = -1
     let totalNumberOfImages = 9
+    var audioPlayer: AVAudioPlayer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         messageLabel.text = ""
     }
-
     
     
-    @IBAction func showMessagePressed(_ sender: UIButton) {
-
+    
+    @IBAction func messageButtonPressed(_ sender: UIButton) {
+        
         let messages = ["You Are Awesome!",
                         "You Are Great",
                         "You Are Fantastic!",
                         "When the Genius Bar Needs Help, They Call You!",
                         "Faboulous? That's You!",
                         "You've Got The Design Skills of Jon Ive"]
-
-        
-        imageView.image = UIImage(named: "image\(Int.random(in: 0...totalNumberOfImages))")
-        
-        messageLabel.text = messages[Int.random(in: 0...messages.count-1)]
         
         
+        var newMessageNumber: Int
+        repeat {
+            newMessageNumber = Int.random(in: 0...messages.count-1)
+        } while messageNumber == newMessageNumber
+        messageNumber = newMessageNumber
+        messageLabel.text = messages[messageNumber]
+        
+        var newImageNumber: Int
+        repeat {
+            newImageNumber = Int.random(in: 0...totalNumberOfImages-1)
+        } while imageNumber == newImageNumber
+        imageNumber = newImageNumber
+        messageLabel.text = messages[messageNumber]
+        imageView.image = UIImage(named: "image\(imageNumber)")
+        
+        if let sound = NSDataAsset(name: "sound0") {
+            do {
+               try audioPlayer = AVAudioPlayer(data: sound.data)
+                audioPlayer.play()
+            } catch {
+                print("ERROR: \(error.localizedDescription)Could not initialize AVAudioPlayer Object")
+            }
+            
+        } else {
+            print("ERROR: Could not read data from file sound0")
+        }
+    }
+    
+}
         
 //        // let imageName = "image" + String(imageNumber)
 //        let imageName = "image\(imageNumber)"
@@ -70,6 +96,6 @@ class ViewController: UIViewController {
         //            messageLabel.text = awesomeMessage
         //            imageView.image = UIImage(named: "image0")
         //        }
-    }
-}
+//    }
+//}
 
