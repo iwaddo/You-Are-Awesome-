@@ -22,7 +22,20 @@ class ViewController: UIViewController {
         messageLabel.text = ""
     }
     
-    
+    func playSound() {
+        if let sound = NSDataAsset(name: "sound0") {
+            do {
+               try audioPlayer = AVAudioPlayer(data: sound.data)
+                audioPlayer.play()
+            } catch {
+                print("ERROR: \(error.localizedDescription)Could not initialize AVAudioPlayer Object")
+            }
+            
+        } else {
+            print("ERROR: Could not read data from file sound0")
+        }
+
+    }
     
     @IBAction func messageButtonPressed(_ sender: UIButton) {
         
@@ -49,17 +62,7 @@ class ViewController: UIViewController {
         messageLabel.text = messages[messageNumber]
         imageView.image = UIImage(named: "image\(imageNumber)")
         
-        if let sound = NSDataAsset(name: "sound0") {
-            do {
-               try audioPlayer = AVAudioPlayer(data: sound.data)
-                audioPlayer.play()
-            } catch {
-                print("ERROR: \(error.localizedDescription)Could not initialize AVAudioPlayer Object")
-            }
-            
-        } else {
-            print("ERROR: Could not read data from file sound0")
-        }
+        playSound()
     }
     
 }
