@@ -21,7 +21,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         messageLabel.text = ""
     }
-    
+    // This function will play sound
     func playSound() {
         if let sound = NSDataAsset(name: "sound0") {
             do {
