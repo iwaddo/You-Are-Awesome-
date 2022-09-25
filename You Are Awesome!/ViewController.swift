@@ -14,7 +14,9 @@ class ViewController: UIViewController {
     
     var imageNumber = -1
     var messageNumber = -1
+    var soundNumber = -1
     let totalNumberOfImages = 9
+    let totalNumberOfSounds = 6
     var audioPlayer: AVAudioPlayer!
     
     override func viewDidLoad() {
@@ -22,8 +24,8 @@ class ViewController: UIViewController {
         messageLabel.text = ""
     }
     // This function will play sound once I've compleleted the Challenge
-    func playSound() {
-        if let sound = NSDataAsset(name: "sound0") {
+    func playSound(soundfile: String) {
+        if let sound = NSDataAsset(name: soundfile) {
             do {
                try audioPlayer = AVAudioPlayer(data: sound.data)
                 audioPlayer.play()
@@ -62,7 +64,12 @@ class ViewController: UIViewController {
         messageLabel.text = messages[messageNumber]
         imageView.image = UIImage(named: "image\(imageNumber)")
         
-        playSound()
+        var newSoundNumber: Int
+        repeat {
+            newSoundNumber = Int.random(in: 0...totalNumberOfSounds-1)
+        } while soundNumber == newSoundNumber
+        soundNumber = newSoundNumber
+        playSound(soundfile: "sound\(soundNumber)")
     }
     
 }
