@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     let totalNumberOfImages = 9
     let totalNumberOfSounds = 6
     var audioPlayer: AVAudioPlayer!
+    var newNumber = -1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +41,15 @@ class ViewController: UIViewController {
 
     }
     
+    // Funtion to generate non-repeating random values
+    func nonRepeatingRandom(originalNumber: Int, upperBounds: Int) -> Int {
+        var theNumber = originalNumber
+        repeat {
+            theNumber = Int.random(in: 0...upperBounds)
+        } while originalNumber == theNumber
+        return theNumber
+    }
+    
     @IBAction func messageButtonPressed(_ sender: UIButton) {
         
         let messages = ["You Are Awesome!",
@@ -50,30 +60,18 @@ class ViewController: UIViewController {
                         "You've Got The Design Skills of Jon Ive"]
         
         
-        var newMessageNumber: Int
-        repeat {
-            newMessageNumber = Int.random(in: 0...messages.count-1)
-        } while messageNumber == newMessageNumber
-        messageNumber = newMessageNumber
+        messageNumber = nonRepeatingRandom(originalNumber: messageNumber, upperBounds: messages.count-1)
         messageLabel.text = messages[messageNumber]
-        print("Message #: \(messageNumber)")
+        print("\nMessage Number: = \(messageNumber)")
         
-        var newImageNumber: Int
-        repeat {
-            newImageNumber = Int.random(in: 0...totalNumberOfImages-1)
-        } while imageNumber == newImageNumber
-        imageNumber = newImageNumber
-        messageLabel.text = messages[messageNumber]
+        imageNumber = nonRepeatingRandom(originalNumber: imageNumber, upperBounds: totalNumberOfImages-1)
         imageView.image = UIImage(named: "image\(imageNumber)")
-        print("Image #: \(imageNumber)")
+        print("Image Number: = \(imageNumber)")
         
-        var newSoundNumber: Int
-        repeat {
-            newSoundNumber = Int.random(in: 0...totalNumberOfSounds-1)
-        } while soundNumber == newSoundNumber
-        soundNumber = newSoundNumber
+        soundNumber = nonRepeatingRandom(originalNumber: soundNumber, upperBounds: totalNumberOfSounds-1)
         playSound(soundfile: "sound\(soundNumber)")
-        print("Sound #: \(soundNumber)")
+        print("Sound Number: = \(soundNumber)")
+        
     }
     
 }
