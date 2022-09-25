@@ -21,7 +21,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         messageLabel.text = ""
     }
-    // This function will play sound
+    // This function will play sound once I've compleleted the Challenge
     func playSound() {
         if let sound = NSDataAsset(name: "sound0") {
             do {
