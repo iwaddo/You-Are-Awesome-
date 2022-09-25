@@ -55,6 +55,7 @@ class ViewController: UIViewController {
         } while messageNumber == newMessageNumber
         messageNumber = newMessageNumber
         messageLabel.text = messages[messageNumber]
+        print("Message #: \(messageNumber)")
         
         var newImageNumber: Int
         repeat {
@@ -63,6 +64,7 @@ class ViewController: UIViewController {
         imageNumber = newImageNumber
         messageLabel.text = messages[messageNumber]
         imageView.image = UIImage(named: "image\(imageNumber)")
+        print("Image #: \(imageNumber)")
         
         var newSoundNumber: Int
         repeat {
@@ -70,6 +72,7 @@ class ViewController: UIViewController {
         } while soundNumber == newSoundNumber
         soundNumber = newSoundNumber
         playSound(soundfile: "sound\(soundNumber)")
+        print("Sound #: \(soundNumber)")
     }
     
 }
